@@ -13,6 +13,7 @@ export default function App() {
 
   const [pickedNumber, setPickedNumber] = useState();
   const [gameOver, setGameOver] = useState(true);
+  const [rounds, setRounds] = useState(0);
   const [fontLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
@@ -20,6 +21,10 @@ export default function App() {
 
   if(!fontLoaded){
     return <AppLoading />
+  }
+
+  const roundhandler = () =>{
+    setRounds((prevValue) => prevValue + 1)
   }
 
   const gameOverHandler = () => {
@@ -30,16 +35,22 @@ export default function App() {
     setGameOver(false)
   }
 
+  const restartGameHandler = () => {
+    setGameOver(false),
+    setPickedNumber(null),
+    setRounds(0)
+  }
+
   let screens = <StartGameScreen onPicked={onPickedHumberHandler} />
 
   
 
   if (pickedNumber){
-    screens = <GameScreen userNumber={pickedNumber} onGameOver={gameOverHandler} />
+    screens = <GameScreen userNumber={pickedNumber} onGameOver={gameOverHandler} onRounds={roundhandler} />
   } 
 
   if (gameOver && pickedNumber) {
-    screens = <GameOverScreen />
+    screens = <GameOverScreen userNumber={pickedNumber} rounds={rounds} onRestartGame={restartGameHandler}/>
   } 
 
   return (
