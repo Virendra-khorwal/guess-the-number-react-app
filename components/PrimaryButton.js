@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonInnerContainer: {
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     color: Color.primary,
     textAlign: 'center',
     fontFamily: 'open-sans',

@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         color: Color.accent500,
+        fontSize: 20,
     },
     numberInput: {
         width: 50,
