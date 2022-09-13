@@ -1,10 +1,11 @@
 import { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import Color from "../constants/Color";
+import Title from '../components/Title'
 
-const { View, TextInput, StyleSheet, Alert } = require("react-native");
+const { View, TextInput, StyleSheet, Alert, Text } = require("react-native");
 
-const StartGameScreen = ({onPicked}) => {
+const StartGameScreen = ({ onPicked }) => {
     const [enteredNumber, setEnteredNumber] = useState('');
 
     const resetInputHandler = () => {
@@ -13,8 +14,8 @@ const StartGameScreen = ({onPicked}) => {
 
     const confirmHandler = () => {
         const chosenNumber = parseInt(enteredNumber)
-        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber >99){
-            Alert.alert('Invalid Number', 'Enter a valid number between 0 to 99', [{text: 'Okay', style:'destructive', onPress: resetInputHandler}] );
+        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+            Alert.alert('Invalid Number', 'Enter a valid number between 0 to 99', [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]);
             return
         }
 
@@ -23,25 +24,37 @@ const StartGameScreen = ({onPicked}) => {
 
 
     return (
-        <View style={styles.inputContainer} >
-            <TextInput style={styles.numberInput} maxLength={2} keyboardType='number-pad' value={enteredNumber} onChangeText={(enteredNumber) => setEnteredNumber(enteredNumber)} />
-            <View style={styles.buttonsContainer}>
-                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-                <PrimaryButton onPress={confirmHandler} >Confirm</PrimaryButton>
+        <View style={styles.screenContainer}>
+            <Title>Guess the Number</Title>
+            <View style={styles.inputContainer} >
+                <Text style={styles.textContainer}>Enter the number</Text>
+                <TextInput style={styles.numberInput} maxLength={2} keyboardType='number-pad' value={enteredNumber} onChangeText={(enteredNumber) => setEnteredNumber(enteredNumber)} />
+                <View style={styles.buttonsContainer}>
+                    <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+                    <PrimaryButton onPress={confirmHandler} >Confirm</PrimaryButton>
+                </View>
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    screenContainer: {
+        flex: 1,
+        marginTop: 100,
+        marginHorizontal: 30,
+    },
     inputContainer: {
         padding: 16,
-        marginTop: 100,
+        marginTop: 30,
         backgroundColor: Color.primary,
-        marginHorizontal: 30,
+        
         borderRadius: 4,
         elevation: 6,
         alignItems: 'center',
+    },
+    textContainer: {
+        color: Color.accent500,
     },
     numberInput: {
         width: 50,
@@ -53,7 +66,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
 
     },
-    buttonsContainer : {
+    buttonsContainer: {
         flexDirection: 'row',
         marginTop: 10,
 

@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: Color.accent500,
         fontSize: 20,
+        fontFamily: 'open-sans'
     },
 })
 
