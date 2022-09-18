@@ -3,10 +3,11 @@ import PrimaryButton from "../components/PrimaryButton";
 import Color from "../constants/Color";
 import Title from '../components/Title'
 
-const { View, TextInput, StyleSheet, Alert, Text } = require("react-native");
+const { View, TextInput, StyleSheet, Alert, Text, useWindowDimensions } = require("react-native");
 
 const StartGameScreen = ({ onPicked }) => {
     const [enteredNumber, setEnteredNumber] = useState('');
+    const { width, height} = useWindowDimensions(); // whenever orientation changes it update the height and width.
 
     const resetInputHandler = () => {
         setEnteredNumber('')
@@ -22,9 +23,11 @@ const StartGameScreen = ({ onPicked }) => {
         onPicked(chosenNumber)
     }
 
+    const marginTopDistance = height < 400 ? 30 : 100; 
+
 
     return (
-        <View style={styles.screenContainer}>
+        <View style={[styles.screenContainer, {marginTop: marginTopDistance}]}>
             <Title>Guess the Number</Title>
             <View style={styles.inputContainer} >
                 <Text style={styles.textContainer}>Enter the number</Text>
